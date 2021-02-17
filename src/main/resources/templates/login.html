@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+</head>
+<body>
+<!-- Include _menu.html -->
+
+<h1>Login</h1>
+
+<h2>Social Login</h2>
+
+<a th:href="@{/oauth2/authorization/facebook}">Facebook</a>
+<br />
+<a th:href="@{/oauth2/authorization/google}">Google</a>
+<br />
+
+
+<!-- /login?error=true -->
+<div th:if="${#request.getParameter('error') == 'true'}"
+     style="color:#ff0000;margin:10px 0px;">
+    Login Failed!!!<br />
+    Reason :
+    <span th:if="${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}"
+          th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}">
+                Static summary
+         </span>
+
+</div>
+
+<h3>Enter user name and password:</h3>
+<form name='f' action="/login" method='POST'>
+    <table>
+
+            <td>User:</td>
+            <td><input type='text' name='username'></td>
+
+            <td>Password:</td>
+            <td><input type='password' name='password' /></td>
+
+            <td>Remember Me?</td>
+            <td><input type="checkbox" name="remember-me" /></td>
+
+
+            <td><input name="submit" type="submit" value="submit" /></td>
+
+    </table>
+</form>
+
+<br>
+Username/pass:
+<ul>
+    <li>dbuser1/123</li>
+    <li>dbadmin1/123</li>
+</ul>
+
+</body>
+
+</html>
